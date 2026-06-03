@@ -26,6 +26,34 @@ ALL_BUTTONS: tuple[Button, ...] = (
 )
 
 
+def disable_state_mutation_keys() -> None:
+    """Strip PyBoy's save/load/rewind keybindings from the SDL window.
+
+    PyBoy ships QoL bindings that silently change game state when the
+    user happens to press them:
+
+      X        -> STATE_LOAD            (caused a Charmander-wipe
+                                         during a demo recording)
+      Z        -> STATE_SAVE
+      comma    -> PRESS_REWIND_BACK
+      period   -> PRESS_REWIND_FORWARD
+
+    None of these are wanted during a human play session — a stray
+    press invalidates the recorded trajectory. Strip them from PyBoy's
+    module-level keymap dicts before creating any PyBoyEmulator with
+    render=True. Idempotent and harmless to headless use.
+
+    All four are key-release bindings (KEY_UP), so KEY_DOWN doesn't
+    contain them; we still .pop() from both for symmetry.
+    """
+    import sdl2
+    import pyboy.plugins.window_sdl2 as ws
+
+    for key in (sdl2.SDLK_x, sdl2.SDLK_z, sdl2.SDLK_COMMA, sdl2.SDLK_PERIOD):
+        ws.KEY_UP.pop(key, None)
+        ws.KEY_DOWN.pop(key, None)
+
+
 def resolve_rom_path(explicit: str | os.PathLike[str] | None = None) -> Path:
     """Resolve the ROM path: explicit arg > $POKEMON_RED_ROM > repo default.
 
