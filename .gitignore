@@ -9,10 +9,11 @@ __pycache__/
 .mypy_cache/
 *.egg-info/
 
-# Virtual environments
-.venv/
-venv/
-env/
+# Virtual environments — anchor to repo root so we don't shadow the
+# pokemon_red_ai/env/ package
+/.venv/
+/venv/
+/env/
 
 # uv
 .python-version
