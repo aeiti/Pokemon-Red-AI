@@ -1,0 +1,33 @@
+[project]
+name = "pokemon-red-ai"
+version = "0.1.0"
+description = "Behavioral cloning + reinforcement learning agent that plays Pokemon Red"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    "pyboy>=2.0",
+    "gymnasium>=0.29",
+    "stable-baselines3>=2.3",
+    "torch>=2.2",
+    "numpy>=1.26,<2.0",
+    "h5py>=3.10",
+    "tensorboard>=2.16",
+    "tqdm>=4.66",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["pokemon_red_ai"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]

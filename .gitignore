@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.egg-info/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# uv
+.python-version
+
+# macOS
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Project artifacts
+roms/                    # ROM files are user-supplied, never committed
+demonstrations/          # Human play traces (HDF5), large and personal
+runs/                    # TensorBoard logs
+checkpoints/             # Trained model weights
+*.zip                    # SB3 model archives
+
+# Notebook scratch output
+.ipynb_checkpoints/
+
+# Local environment overrides
+.env
+.env.local
