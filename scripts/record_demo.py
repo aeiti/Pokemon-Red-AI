@@ -35,7 +35,11 @@ from pathlib import Path
 
 import numpy as np
 
-from pokemon_red_ai.emulator.pyboy_env import PyBoyEmulator, resolve_rom_path
+from pokemon_red_ai.emulator.pyboy_env import (
+    PyBoyEmulator,
+    disable_state_mutation_keys,
+    resolve_rom_path,
+)
 from pokemon_red_ai.env.demo_format import save_demo, sha256_file
 from pokemon_red_ai.env.keyboard_action import poll_pressed_scancodes, decode_action
 from pokemon_red_ai.env.metrics import metrics
@@ -69,6 +73,8 @@ def main() -> None:
     if not args.start.is_file():
         raise SystemExit(f"Start state not found: {args.start}")
 
+    disable_state_mutation_keys()
+
     output_path = args.output or DEMOS_DIR / _default_output_name()
     rom_path = resolve_rom_path()
     rom_hash = sha256_file(rom_path)
@@ -77,6 +83,7 @@ def main() -> None:
     print(f"  Start state: {args.start.relative_to(REPO_ROOT)}")
     print(f"  Output:      {output_path.relative_to(REPO_ROOT)}")
     print(f"  Frame skip:  {args.frame_skip} ({60 / args.frame_skip:.1f} decisions/sec)")
+    print("  PyBoy save/load/rewind keys (X, Z, comma, period) are disabled.")
     print("  Play normally. Close the window when done.")
     print()
 
