@@ -138,6 +138,9 @@ project; treat the first version as a starting point, not a target.
 - **One commit per logical change.** Multi-file commits are fine when
   changes are inseparable; split when they're not.
 - **No merging to `main` without explicit user OK.**
+- **Merge commits, not squash.** Always merge with `--no-ff` (or
+  `gh pr merge --merge`). Per-commit history is preserved in `main`,
+  so optimize for readable per-commit messages on feature branches.
 - All branching/merging local before push to origin.
 - Commit messages: imperative mood, short subject, body if non-obvious.
 
