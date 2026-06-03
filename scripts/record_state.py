@@ -57,7 +57,7 @@ def main() -> None:
 
     print("Recording session started.")
     print("  F1: save state    |    Close window or Esc: quit")
-    print("  Save confirmation appears in the terminal AND the window title bar.")
+    print("  Save confirmation lines appear in this terminal — watch here.")
     if args.output:
         print(f"  Every F1 will overwrite saved_states/{args.output}")
     else:
@@ -78,7 +78,6 @@ def main() -> None:
                 emu.save_state(path)
                 save_count += 1
                 print(f"  [saved #{save_count}] {path.relative_to(REPO_ROOT)}")
-                emu.pyboy.title_status = f"saved #{save_count} → {path.name}"
             prev_f1 = f1_now
 
     print(f"\nSession ended. {save_count} state(s) saved.")
